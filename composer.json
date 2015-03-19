@@ -1,0 +1,21 @@
+{
+	"name": "iinvoices/api-client",
+	"description": "API client for minifaktura.sk, minifaktura.cz, minirechnung.at, minirechnung.de",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Martin Bažík",
+			"email": "martin@bazo.sk"
+		}
+	],
+	"require": {},
+	"require-dev": {
+		"nette/tester": "@dev",
+		"nette/robot-loader": "@dev"
+	},
+	"autoload": {
+		"psr-4": {
+			"iinvoices\\": "src/"
+		}
+	}
+}
