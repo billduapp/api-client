@@ -8,7 +8,9 @@
 			"email": "martin@bazo.sk"
 		}
 	],
-	"require": {},
+	"require": {
+		"guzzlehttp/guzzle": "@dev"
+	},
 	"require-dev": {
 		"nette/tester": "@dev",
 		"nette/robot-loader": "@dev"

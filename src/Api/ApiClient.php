@@ -2,6 +2,10 @@
 
 namespace iInvoices\Api;
 
+
+use GuzzleHttp\Client;
+use GuzzleHttp\Event\BeforeEvent;
+use GuzzleHttp\Event\EmitterInterface;
 use iInvoices\CurlClient;
 
 /**
@@ -19,10 +23,10 @@ class ApiClient
 	/** @var string */
 	private $apiSecret;
 
-	/** @var CurlClient */
+	/** @var Client */
 	private $curl;
 
-	/** @var \iInvoices\Api\Clients */
+	/** @var Clients */
 	public $clients;
 
 	public function __construct($domain, $apiKey = NULL, $apiSecret = NULL)
@@ -31,19 +35,33 @@ class ApiClient
 		$this->apiKey	 = $apiKey;
 		$this->apiSecret = $apiSecret;
 
-		$this->curl = new CurlClient($domain);
-		$this->setDefaultCurlHeaders();
+		$config = [
+			'base_url' => $domain
+		];
 
-		$this->clients = new \iInvoices\Api\Clients($this->curl);
+		$this->curl	 = new Client($config);
+		$emitter	 = $this->curl->getEmitter();
+		$emitter->on('before', [$this, 'setDefaultCurlHeaders']);
+		$emitter->on('complete', [$this, 'parseResponse']);
+
+		$this->clients = new Clients($this->curl);
 	}
 
 
-	private function setDefaultCurlHeaders()
+	public function setDefaultCurlHeaders(BeforeEvent $event, $name, EmitterInterface $emitter = NULL)
 	{
-		$this->curl->setDefaultHeaders([
+		$request = $event->getRequest();
+		$request->addHeaders([
 			'apiKey'	 => $this->apiKey,
 			'apiSecret'	 => $this->apiSecret
 		]);
+	}
+
+
+	public function parseResponse(\GuzzleHttp\Event\CompleteEvent $event)
+	{
+		$response = $event->getResponse();
+		$response->response = \iInvoices\Api\ResponseParser::parse($response->getBody()->getContents());
 	}
 
 
@@ -57,8 +75,6 @@ class ApiClient
 	{
 		$this->apiKey	 = $apiKey;
 		$this->apiSecret = $apiSecret;
-
-		$this->setDefaultCurlHeaders();
 
 		return $this;
 	}

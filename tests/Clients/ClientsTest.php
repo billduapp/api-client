@@ -15,7 +15,7 @@ class ClientsTest extends TestCase
 
 	public function testListAll()
 	{
-		$response = $this->api->clients->listAllClients();
+		$response = $this->api->clients->listAll();
 
 		Assert::type(\iInvoices\Api\Responses\Collection::class, $response);
 		\Tester\Assert::equal(1, $response->getPage());
@@ -26,7 +26,7 @@ class ClientsTest extends TestCase
 
 	public function testGetClient()
 	{
-		$client = $this->api->clients->getClient(1);
+		$client = $this->api->clients->get(1);
 
 		Assert::type(\iInvoices\Api\Responses\Single::class, $client);
 		\Tester\Assert::equal(4, $client->id);

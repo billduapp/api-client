@@ -11,51 +11,53 @@ use iInvoices\CurlClient;
 class Clients
 {
 
-	/** @var CurlClient */
+	/** @var \GuzzleHttp\Client */
 	private $curl;
 
-	public function __construct(CurlClient $curl)
+	public function __construct(\GuzzleHttp\Client $curl)
 	{
 		$this->curl = $curl;
 	}
 
 
-	public function listAllClients()
+	public function listAll()
 	{
-		$response = $this->curl->execute(CurlClient::GET, '/clients');
+		$response = $this->curl->get('/clients');
+
+		return $response->response;
+	}
+
+
+	public function get($id)
+	{
+		$response = $this->curl->get('/clients/' . $id);
+
+		return $response->response;
+	}
+
+
+	public function create($data)
+	{
+		$response = $this->curl->post('/clients/', ['json' => $data]);
 
 		return $response;
 	}
 
 
-	public function getClient($id)
+	public function update($id, $data)
 	{
-		$response = $this->curl->execute(CurlClient::GET, '/clients/' . $id);
+		$response = $this->curl->get('/clients/' . $id, ['json' => $data]);
 
 		return $response;
 	}
 
 
-	public function createClient($data)
+	public function delete($id)
 	{
-		$response = $this->curl->execute(CurlClient::POST, '/clients/', $data);
+		$response = $this->curl->get('/clients/' . $id);
 
 		return $response;
 	}
 
-
-	public function updateClient($id, $data)
-	{
-		$response = $this->curl->execute(CurlClient::PATCH, '/clients/' . $id, $data);
-
-		return $response;
-	}
-
-	public function deleteClient($id)
-	{
-		$response = $this->curl->execute(CurlClient::DELETE, '/clients/' . $id);
-
-		return $response;
-	}
 
 }
