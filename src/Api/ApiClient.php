@@ -3,7 +3,8 @@
 namespace iInvoices\Api;
 
 
-use GuzzleHttp\Client;
+//use GuzzleHttp\Client;
+use iInvoices\Api\Guzzle\WrappedClient as Client;
 use GuzzleHttp\Event\BeforeEvent;
 use GuzzleHttp\Event\EmitterInterface;
 use iInvoices\CurlClient;
@@ -45,7 +46,7 @@ class ApiClient
 		$this->curl	 = new Client($config);
 		$emitter	 = $this->curl->getEmitter();
 		$emitter->on('before', [$this, 'setDefaultCurlHeaders']);
-		$emitter->on('complete', [$this, 'parseResponse']);
+		$emitter->on('complete', [$this, 'parseResponse'], 'first');
 
 		$this->clients	 = new Clients($this->curl);
 		$this->products	 = new Products($this->curl);
