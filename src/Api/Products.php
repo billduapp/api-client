@@ -39,6 +39,10 @@ class Products
 
 	public function create($data)
 	{
+		$data['price'] = (float) $data['price'];
+		$data['vat'] = (float) $data['vat'];
+		$data['count'] = (float) $data['count'];
+
 		$response = $this->curl->post('/products/', ['json' => $data]);
 
 		return $response;
