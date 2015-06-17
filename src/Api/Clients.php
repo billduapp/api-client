@@ -3,8 +3,6 @@
 namespace iInvoices\Api;
 
 
-use iInvoices\CurlClient;
-
 /**
  * @author Martin Bažík <martin@bazo.sk>
  */
@@ -20,6 +18,9 @@ class Clients
 	}
 
 
+	/**
+	 * @return \iInvoices\Api\Responses\Collection
+	 */
 	public function listAll()
 	{
 		$response = $this->curl->get('/clients');

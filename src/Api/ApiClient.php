@@ -29,6 +29,9 @@ class ApiClient
 	/** @var Clients */
 	public $clients;
 
+	/** @var Products */
+	public $products;
+
 	public function __construct($domain, $apiKey = NULL, $apiSecret = NULL)
 	{
 		$this->domain	 = $domain;
@@ -44,7 +47,8 @@ class ApiClient
 		$emitter->on('before', [$this, 'setDefaultCurlHeaders']);
 		$emitter->on('complete', [$this, 'parseResponse']);
 
-		$this->clients = new Clients($this->curl);
+		$this->clients	 = new Clients($this->curl);
+		$this->products	 = new Products($this->curl);
 	}
 
 
@@ -60,8 +64,8 @@ class ApiClient
 
 	public function parseResponse(\GuzzleHttp\Event\CompleteEvent $event)
 	{
-		$response = $event->getResponse();
-		$response->response = \iInvoices\Api\ResponseParser::parse($response->getBody()->getContents());
+		$response			 = $event->getResponse();
+		$response->response	 = \iInvoices\Api\ResponseParser::parse($response->getBody()->getContents());
 	}
 
 

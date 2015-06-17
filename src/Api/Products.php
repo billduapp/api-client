@@ -6,7 +6,7 @@ namespace iInvoices\Api;
 /**
  * @author Martin Bažík <martin@bazo.sk>
  */
-class Documents
+class Products
 {
 
 	/** @var \GuzzleHttp\Client */
@@ -18,9 +18,12 @@ class Documents
 	}
 
 
+	/**
+	 * @return \iInvoices\Api\Responses\Collection
+	 */
 	public function listAll()
 	{
-		$response = $this->curl->get('/documents');
+		$response = $this->curl->get('/products');
 
 		return $response->response;
 	}
@@ -28,7 +31,7 @@ class Documents
 
 	public function get($id)
 	{
-		$response = $this->curl->get('/documents/' . $id);
+		$response = $this->curl->get('/products/' . $id);
 
 		return $response->response;
 	}
@@ -36,7 +39,7 @@ class Documents
 
 	public function create($data)
 	{
-		$response = $this->curl->post('/documents/', ['json' => $data]);
+		$response = $this->curl->post('/products/', ['json' => $data]);
 
 		return $response;
 	}
@@ -44,7 +47,7 @@ class Documents
 
 	public function update($id, $data)
 	{
-		$response = $this->curl->get('/documents/' . $id, ['json' => $data]);
+		$response = $this->curl->get('/products/' . $id, ['json' => $data]);
 
 		return $response;
 	}
@@ -52,7 +55,7 @@ class Documents
 
 	public function delete($id)
 	{
-		$response = $this->curl->get('/documents/' . $id);
+		$response = $this->curl->get('/products/' . $id);
 
 		return $response;
 	}
