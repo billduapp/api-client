@@ -10,7 +10,7 @@ class Documents
 {
 
 	/** @var \GuzzleHttp\Client */
-	private $curl;
+	protected $curl;
 
 	public function __construct(\GuzzleHttp\Client $curl)
 	{

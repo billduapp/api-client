@@ -33,6 +33,9 @@ class ApiClient
 	/** @var Products */
 	public $products;
 
+	/** @var Orders */
+	public $orders;
+
 	public function __construct($domain, $apiKey = NULL, $apiSecret = NULL)
 	{
 		$this->domain	 = $domain;
@@ -50,6 +53,7 @@ class ApiClient
 
 		$this->clients	 = new Clients($this->curl);
 		$this->products	 = new Products($this->curl);
+		$this->orders	 = new Orders($this->curl);
 	}
 
 
