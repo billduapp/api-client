@@ -6,7 +6,7 @@ namespace iInvoices\Api\Responses;
 /**
  * @author Martin Bažík <martin@bazo.sk>
  */
-class Collection
+class Collection implements \IteratorAggregate
 {
 
 	/** @var string */
@@ -137,6 +137,12 @@ class Collection
 	public function getItems()
 	{
 		return $this->items;
+	}
+
+
+	public function getIterator()
+	{
+		return new \ArrayIterator($this->items);
 	}
 
 
