@@ -29,7 +29,7 @@ class ResponseParser
 
 	private static function parseSingle($response)
 	{
-		return new \iInvoices\Api\Responses\Single($response);
+		return (object) $response;
 	}
 
 

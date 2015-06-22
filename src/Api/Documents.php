@@ -6,7 +6,7 @@ namespace iInvoices\Api;
 /**
  * @author Martin Bažík <martin@bazo.sk>
  */
-class Documents
+abstract class Documents
 {
 
 	/** @var \GuzzleHttp\Client */

@@ -12,6 +12,6 @@ class Orders extends Documents
 		$data['type'] = 'order';
 		$response = $this->curl->post('/documents/', ['json' => $data]);
 
-		return $response;
+		return $response->response;
 	}
 }

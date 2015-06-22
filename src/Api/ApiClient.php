@@ -36,6 +36,9 @@ class ApiClient
 	/** @var Orders */
 	public $orders;
 
+	/** @var Invoices */
+	public $invoices;
+
 	public function __construct($domain, $apiKey = NULL, $apiSecret = NULL)
 	{
 		$this->domain	 = $domain;
@@ -51,9 +54,12 @@ class ApiClient
 		$emitter->on('before', [$this, 'setDefaultCurlHeaders']);
 		$emitter->on('complete', [$this, 'parseResponse'], 'first');
 
+		$this->curl->setDefaultOption('verify', false);
+
 		$this->clients	 = new Clients($this->curl);
 		$this->products	 = new Products($this->curl);
 		$this->orders	 = new Orders($this->curl);
+		$this->invoices	 = new Invoices($this->curl);
 	}
 
 

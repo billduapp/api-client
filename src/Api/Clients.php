@@ -41,7 +41,7 @@ class Clients
 	{
 		$response = $this->curl->post('/clients/', ['json' => $data]);
 
-		return $response;
+		return $response->response;
 	}
 
 
@@ -49,7 +49,7 @@ class Clients
 	{
 		$response = $this->curl->get('/clients/' . $id, ['json' => $data]);
 
-		return $response;
+		return $response->response;
 	}
 
 
@@ -57,7 +57,7 @@ class Clients
 	{
 		$response = $this->curl->get('/clients/' . $id);
 
-		return $response;
+		return $response->response;
 	}
 
 
