@@ -10,7 +10,7 @@
 	],
 	"require": {
 		"guzzlehttp/guzzle": "5.3.0",
-		"nette/utils": "v2.3"
+		"nette/utils": "@dev"
 	},
 	"require-dev": {
 		"nette/tester": "@dev",
