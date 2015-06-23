@@ -3,16 +3,18 @@
 namespace iInvoices\Api;
 
 
+use iInvoices\Api\Curl\Client;
+
 /**
  * @author Martin Bažík <martin@bazo.sk>
  */
 class Clients
 {
 
-	/** @var \GuzzleHttp\Client */
+	/** @var Client */
 	private $curl;
 
-	public function __construct(\GuzzleHttp\Client $curl)
+	public function __construct(Client $curl)
 	{
 		$this->curl = $curl;
 	}
@@ -39,15 +41,15 @@ class Clients
 
 	public function create($data)
 	{
-		$response = $this->curl->post('/clients/', ['json' => $data]);
-
+		$response = $this->curl->post('/clients/', $data);
+dump($response);exit;
 		return $response->response;
 	}
 
 
 	public function update($id, $data)
 	{
-		$response = $this->curl->get('/clients/' . $id, ['json' => $data]);
+		$response = $this->curl->get('/clients/' . $id, $data);
 
 		return $response->response;
 	}

@@ -1,7 +1,7 @@
 <?php
 
 namespace iInvoices\Api;
-
+use iInvoices\Api\Curl\Client;
 
 /**
  * @author Martin Bažík <martin@bazo.sk>
@@ -9,10 +9,10 @@ namespace iInvoices\Api;
 class Products
 {
 
-	/** @var \GuzzleHttp\Client */
+	/** @var Client */
 	private $curl;
 
-	public function __construct(\GuzzleHttp\Client $curl)
+	public function __construct(Client $curl)
 	{
 		$this->curl = $curl;
 	}
@@ -43,7 +43,7 @@ class Products
 		$data['vat'] = (float) $data['vat'];
 		$data['count'] = (float) $data['count'];
 
-		$response = $this->curl->post('/products/', ['json' => $data]);
+		$response = $this->curl->post('/products/', $data);
 
 		return $response;
 	}
@@ -51,7 +51,7 @@ class Products
 
 	public function update($id, $data)
 	{
-		$response = $this->curl->get('/products/' . $id, ['json' => $data]);
+		$response = $this->curl->get('/products/' . $id, $data);
 
 		return $response;
 	}

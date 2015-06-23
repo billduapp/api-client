@@ -10,7 +10,7 @@ class Invoices extends Documents
 	public function create($data)
 	{
 		$data['type'] = 'invoice';
-		$response = $this->curl->post('/documents/', ['json' => $data]);
+		$response = $this->curl->post('/documents/', $data);
 
 		return $response->response;
 	}

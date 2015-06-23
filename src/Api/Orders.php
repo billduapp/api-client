@@ -10,7 +10,7 @@ class Orders extends Documents
 	public function create($data)
 	{
 		$data['type'] = 'order';
-		$response = $this->curl->post('/documents/', ['json' => $data]);
+		$response = $this->curl->post('/documents/', $data);
 
 		return $response->response;
 	}

@@ -4,7 +4,8 @@ namespace iInvoices\Api;
 
 
 //use GuzzleHttp\Client;
-use iInvoices\Api\Guzzle\WrappedClient as Client;
+//use iInvoices\Api\Guzzle\WrappedClient as Client;
+use iInvoices\Api\Curl\Client;
 use GuzzleHttp\Event\BeforeEvent;
 use GuzzleHttp\Event\EmitterInterface;
 use iInvoices\CurlClient;
@@ -49,27 +50,33 @@ class ApiClient
 			'base_url' => $domain
 		];
 
-		$this->curl	 = new Client($config);
-		$emitter	 = $this->curl->getEmitter();
-		$emitter->on('before', [$this, 'setDefaultCurlHeaders']);
-		$emitter->on('complete', [$this, 'parseResponse'], 'first');
+		$curl = new Client($config);
 
-		$this->curl->setDefaultOption('verify', false);
+		$curl->onBeforeRequest[] = function(Curl\Request $request) {
+			$data = $request->getData();
 
-		$this->clients	 = new Clients($this->curl);
-		$this->products	 = new Products($this->curl);
-		$this->orders	 = new Orders($this->curl);
-		$this->invoices	 = new Invoices($this->curl);
-	}
+			$timestamp = time();
+
+			$toSign				 = $data;
+			$toSign['timestamp'] = (int) $timestamp;
+			$toSign['apiKey']	 = $this->apiKey;
+
+			ksort($toSign);
+
+			$json = \Nette\Utils\Json::encode($toSign);
+
+			$signature	 = base64_encode(hash_hmac('sha512', $json, $this->apiSecret, $raw		 = TRUE));
+
+			$request->setQuery('apiKey', $this->apiKey);
+			$request->setQuery('timestamp', $timestamp);
+			$request->setQuery('signature', $signature);
+		};
 
 
-	public function setDefaultCurlHeaders(BeforeEvent $event, $name, EmitterInterface $emitter = NULL)
-	{
-		$request = $event->getRequest();
-		$request->addHeaders([
-			'apiKey'	 => $this->apiKey,
-			'apiSecret'	 => $this->apiSecret
-		]);
+		$this->clients	 = new Clients($curl);
+		$this->products	 = new Products($curl);
+		$this->orders	 = new Orders($curl, $this->apiKey, $this->apiSecret);
+		$this->invoices	 = new Invoices($curl, $this->apiKey, $this->apiSecret);
 	}
 
 
@@ -92,14 +99,6 @@ class ApiClient
 		$this->apiSecret = $apiSecret;
 
 		return $this;
-	}
-
-
-	public function listAllClients()
-	{
-		$response = $this->curl->execute(CurlClient::GET, '/clients');
-
-		return $response;
 	}
 
 
