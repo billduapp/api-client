@@ -14,17 +14,10 @@ abstract class Documents
 	/** @var Client */
 	protected $curl;
 
-	/** @var string */
-	protected $apiKey;
 
-	/** @var string */
-	protected $apiSecret;
-
-	public function __construct(Client $curl, $apiKey, $apiSecret)
+	public function __construct(Client $curl)
 	{
 		$this->curl		 = $curl;
-		$this->apiKey	 = $apiKey;
-		$this->apiSecret = $apiSecret;
 	}
 
 
@@ -32,7 +25,7 @@ abstract class Documents
 	{
 		$response = $this->curl->get('/documents');
 
-		return $response->response;
+		return $response;
 	}
 
 
@@ -40,7 +33,7 @@ abstract class Documents
 	{
 		$response = $this->curl->get('/documents/' . $id);
 
-		return $response->response;
+		return $response;
 	}
 
 
@@ -76,15 +69,10 @@ abstract class Documents
 
 	public function getDownloadLink($id)
 	{
-		$toSign = [
-			'apiKey' => $this->apiKey,
-			'id'	 => $id
-		];
+		$request = $this->curl->createRequest('GET', '/documents/' . $id . '/download');
+		$url = $request->buildUrl();
 
-		$json		 = \Nette\Utils\Json::encode($toSign);
-		$signature	 = base64_encode(hash_hmac('sha512', $json, $this->apiSecret, $raw		 = TRUE));
-
-		return $this->curl->getBaseUrl() . '/documents/' . $id . '/download?signature=' . urlencode($signature);
+		return $url;
 	}
 
 

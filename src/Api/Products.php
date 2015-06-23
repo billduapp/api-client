@@ -25,7 +25,7 @@ class Products
 	{
 		$response = $this->curl->get('/products');
 
-		return $response->response;
+		return $response;
 	}
 
 
@@ -33,7 +33,7 @@ class Products
 	{
 		$response = $this->curl->get('/products/' . $id);
 
-		return $response->response;
+		return $response;
 	}
 
 

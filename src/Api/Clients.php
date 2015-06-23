@@ -27,7 +27,7 @@ class Clients
 	{
 		$response = $this->curl->get('/clients');
 
-		return $response->response;
+		return $response;
 	}
 
 
@@ -35,15 +35,15 @@ class Clients
 	{
 		$response = $this->curl->get('/clients/' . $id);
 
-		return $response->response;
+		return $response;
 	}
 
 
 	public function create($data)
 	{
 		$response = $this->curl->post('/clients/', $data);
-dump($response);exit;
-		return $response->response;
+
+		return $response;
 	}
 
 
@@ -51,7 +51,7 @@ dump($response);exit;
 	{
 		$response = $this->curl->get('/clients/' . $id, $data);
 
-		return $response->response;
+		return $response;
 	}
 
 
@@ -59,7 +59,7 @@ dump($response);exit;
 	{
 		$response = $this->curl->get('/clients/' . $id);
 
-		return $response->response;
+		return $response;
 	}
 
 

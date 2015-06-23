@@ -74,12 +74,7 @@ class Request
 
 	public function send()
 	{
-		$this->fireCallbacks($this->callbacks['onBeforeRequest'], [$this]);
-		$url = $this->url;
-
-		if (!empty($this->query)) {
-			$url .= '?' . http_build_query($this->query);
-		}
+		$url = $this->buildUrl();
 
 		$ch = curl_init($url);
 
@@ -112,19 +107,52 @@ class Request
 
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 
-		$response = curl_exec($ch);
+		$response	 = curl_exec($ch);
+		$info		 = curl_getinfo($ch);
+
+		$httpCode = $info['http_code'];
+
+		if ($httpCode >= 400 && $httpCode < 500) {
+			$e = new ClientException('Client error on url: ' . $url, $httpCode);
+			$e->setBody($response);
+
+			throw $e;
+		}
+
+		if ($httpCode >= 500 && $httpCode < 600) {
+			$e = new ServerException('Server error on url: ' . $url, $httpCode);
+			$e->setBody($response);
+
+			throw $e;
+		}
 
 		if ($response === FALSE) {
 			$error		 = curl_error($ch);
 			$errorNumber = curl_errno($ch);
 
-			dump($error);
-			dump($errorNumber);
+			throw new CurlException($error, $errorNumber);
 		}
 
-		echo $response;
 		curl_close($ch);
+
+		foreach ($this->callbacks['onBeforeResponse'] as $callback) {
+			$response = call_user_func_array($callback, [$response]);
+		}
+
 		return $response;
+	}
+
+
+	public function buildUrl()
+	{
+		$this->fireCallbacks($this->callbacks['onBeforeRequest'], [$this]);
+		$url = $this->url;
+
+		if (!empty($this->query)) {
+			$url .= '?' . http_build_query($this->query);
+		}
+
+		return $url;
 	}
 
 

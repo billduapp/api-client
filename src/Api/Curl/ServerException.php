@@ -1,6 +1,6 @@
 <?php
 
-namespace iInvoices\Api;
+namespace iInvoices\Api\Curl;
 
 
 /**

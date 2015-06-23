@@ -15,6 +15,9 @@ class Client
 	/** @var array */
 	public $onBeforeRequest = [];
 
+	/** @var array */
+	public $onBeforeResponse = [];
+
 	public function __construct($config)
 	{
 		$baseUrl		 = $config['base_url'];
@@ -22,9 +25,15 @@ class Client
 	}
 
 
+	public function createRequest($method, $path, $data = [], $headers = [])
+	{
+		return new Request($method, $this->buildUrl($path), $data, $headers, $this->buildCallbacks());
+	}
+
+
 	public function get($path, $headers = [])
 	{
-		$request	 = new Request('GET', $this->buildUrl($path), NULL, $headers, $this->buildCallbacks());
+		$request	 = $this->createRequest('GET', $path, NULL, $headers, $this->buildCallbacks());
 		$response	 = $request->send();
 
 		return $response;
@@ -33,7 +42,7 @@ class Client
 
 	public function post($path, $data = [], $headers = [])
 	{
-		$request = new Request('POST', $this->buildUrl($path), $data, $headers, $this->buildCallbacks());
+		$request = $this->createRequest('POST', $path, $data, $headers, $this->buildCallbacks());
 
 		$response = $request->send();
 
@@ -50,7 +59,8 @@ class Client
 	private function buildCallbacks()
 	{
 		return [
-			'onBeforeRequest' => $this->onBeforeRequest
+			'onBeforeRequest' => $this->onBeforeRequest,
+			'onBeforeResponse' => $this->onBeforeResponse
 		];
 	}
 

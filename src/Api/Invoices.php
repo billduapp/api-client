@@ -12,6 +12,6 @@ class Invoices extends Documents
 		$data['type'] = 'invoice';
 		$response = $this->curl->post('/documents/', $data);
 
-		return $response->response;
+		return $response;
 	}
 }

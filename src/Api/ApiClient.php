@@ -72,18 +72,14 @@ class ApiClient
 			$request->setQuery('signature', $signature);
 		};
 
+		$curl->onBeforeResponse[] = function($response) {
+			return ResponseParser::parse($response);
+		};
 
 		$this->clients	 = new Clients($curl);
 		$this->products	 = new Products($curl);
-		$this->orders	 = new Orders($curl, $this->apiKey, $this->apiSecret);
-		$this->invoices	 = new Invoices($curl, $this->apiKey, $this->apiSecret);
-	}
-
-
-	public function parseResponse(\GuzzleHttp\Event\CompleteEvent $event)
-	{
-		$response			 = $event->getResponse();
-		$response->response	 = \iInvoices\Api\ResponseParser::parse($response->getBody()->getContents());
+		$this->orders	 = new Orders($curl);
+		$this->invoices	 = new Invoices($curl);
 	}
 
 
