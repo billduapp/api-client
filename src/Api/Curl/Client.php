@@ -33,7 +33,7 @@ class Client
 
 	public function get($path, $headers = [])
 	{
-		$request	 = $this->createRequest('GET', $path, NULL, $headers, $this->buildCallbacks());
+		$request	 = $this->createRequest('GET', $path, [], $headers, $this->buildCallbacks());
 		$response	 = $request->send();
 
 		return $response;
@@ -50,6 +50,26 @@ class Client
 	}
 
 
+	public function patch($path, $data = [], $headers = [])
+	{
+		$request = $this->createRequest('POST', $path, $data, $headers, $this->buildCallbacks());
+
+		$response = $request->send();
+
+		return $response;
+	}
+
+
+	public function delete($path, $headers = [])
+	{
+		$request = $this->createRequest('DELETE', $path, [], $headers, $this->buildCallbacks());
+
+		$response = $request->send();
+
+		return $response;
+	}
+
+
 	private function buildUrl($path)
 	{
 		return $this->baseUrl . $path;
@@ -59,8 +79,8 @@ class Client
 	private function buildCallbacks()
 	{
 		return [
-			'onBeforeRequest' => $this->onBeforeRequest,
-			'onBeforeResponse' => $this->onBeforeResponse
+			'onBeforeRequest'	 => $this->onBeforeRequest,
+			'onBeforeResponse'	 => $this->onBeforeResponse
 		];
 	}
 

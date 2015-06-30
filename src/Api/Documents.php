@@ -14,10 +14,9 @@ abstract class Documents
 	/** @var Client */
 	protected $curl;
 
-
 	public function __construct(Client $curl)
 	{
-		$this->curl		 = $curl;
+		$this->curl = $curl;
 	}
 
 
@@ -55,7 +54,7 @@ abstract class Documents
 
 	public function delete($id)
 	{
-		$response = $this->curl->get('/documents/' . $id);
+		$response = $this->curl->delete('/documents/' . $id);
 
 		return $response;
 	}
@@ -67,10 +66,16 @@ abstract class Documents
 	}
 
 
+	public function send($id, $data)
+	{
+		$this->curl->post('/documents/' . $id . '/send', $data);
+	}
+
+
 	public function getDownloadLink($id)
 	{
 		$request = $this->curl->createRequest('GET', '/documents/' . $id . '/download');
-		$url = $request->buildUrl();
+		$url	 = $request->buildUrl();
 
 		return $url;
 	}
