@@ -14,10 +14,9 @@ abstract class Documents
 	/** @var Client */
 	protected $curl;
 
-
 	public function __construct(Client $curl)
 	{
-		$this->curl		 = $curl;
+		$this->curl = $curl;
 	}
 
 
@@ -47,7 +46,7 @@ abstract class Documents
 
 	public function update($id, $data)
 	{
-		$response = $this->curl->get('/documents/' . $id, $data);
+		$response = $this->curl->patch('/documents/' . $id, $data);
 
 		return $response;
 	}
@@ -55,7 +54,17 @@ abstract class Documents
 
 	public function delete($id)
 	{
-		$response = $this->curl->get('/documents/' . $id);
+		$response = $this->curl->delete('/documents/' . $id);
+
+		return $response;
+	}
+
+
+	public function search($criteria)
+	{
+		$query = http_build_query($criteria);
+
+		$response = $this->curl->get('/documents/?' . $query);
 
 		return $response;
 	}

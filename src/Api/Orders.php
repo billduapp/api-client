@@ -2,11 +2,13 @@
 
 namespace iInvoices\Api;
 
+
 /**
  * @author Martin Bažík <martin@bazo.sk>
  */
 class Orders extends Documents
 {
+
 	public function create($data)
 	{
 		$data['type'] = 'order';
@@ -14,4 +16,13 @@ class Orders extends Documents
 
 		return $response;
 	}
+
+
+	public function search($criteria)
+	{
+		$criteria['type'] = 'order';
+		return parent::search($criteria);
+	}
+
+
 }

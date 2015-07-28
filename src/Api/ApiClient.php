@@ -6,9 +6,6 @@ namespace iInvoices\Api;
 //use GuzzleHttp\Client;
 //use iInvoices\Api\Guzzle\WrappedClient as Client;
 use iInvoices\Api\Curl\Client;
-use GuzzleHttp\Event\BeforeEvent;
-use GuzzleHttp\Event\EmitterInterface;
-use iInvoices\CurlClient;
 
 /**
  * @author Martin Bažík <martin@bazo.sk>
