@@ -59,7 +59,7 @@ class Products
 
 	public function delete($id)
 	{
-		$response = $this->curl->get('/products/' . $id);
+		$response = $this->curl->delete('/products/' . $id);
 
 		return $response;
 	}

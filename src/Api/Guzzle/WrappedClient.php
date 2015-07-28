@@ -26,7 +26,6 @@ class WrappedClient extends Client
 			$message = $e->getMessage();
 			try {
 				$data	 = Json::decode($body);
-				dump($data);
 				$message = implode(', ', $data->errors);
 			} catch (JsonException $e) {
 				//ignore
@@ -42,7 +41,6 @@ class WrappedClient extends Client
 			$message = $e->getMessage();
 			try {
 				$data	 = Json::decode($body);
-				dump($data);
 				$message = implode(', ', $data->errors);
 			} catch (JsonException $e) {
 				//ignore

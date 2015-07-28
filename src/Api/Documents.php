@@ -60,26 +60,22 @@ abstract class Documents
 	}
 
 
-	public function search($criteria)
-	{
-		$query = http_build_query($criteria);
-
-		$response = $this->curl->get('/documents/?' . $query);
-
-		return $response;
-	}
-
-
 	public function download($id)
 	{
 		$this->curl->get('/documents/' . $id . '/download');
 	}
 
 
+	public function send($id, $data)
+	{
+		$this->curl->post('/documents/' . $id . '/send', $data);
+	}
+
+
 	public function getDownloadLink($id)
 	{
 		$request = $this->curl->createRequest('GET', '/documents/' . $id . '/download');
-		$url = $request->buildUrl();
+		$url	 = $request->buildUrl();
 
 		return $url;
 	}

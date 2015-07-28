@@ -49,7 +49,7 @@ class Clients
 
 	public function update($id, $data)
 	{
-		$response = $this->curl->get('/clients/' . $id, $data);
+		$response = $this->curl->patch('/clients/' . $id, $data);
 
 		return $response;
 	}
@@ -57,7 +57,7 @@ class Clients
 
 	public function delete($id)
 	{
-		$response = $this->curl->get('/clients/' . $id);
+		$response = $this->curl->delete('/clients/' . $id);
 
 		return $response;
 	}

@@ -14,12 +14,20 @@ class ResponseParser
 
 	public static function parse($body)
 	{
-		$response = Json::decode($body);
+		if (empty($body)) {
+			return '';
+		}
 
-		if (isset($response->page)) {
-			return self::parseCollection($response);
-		} else {
-			return self::parseSingle($response);
+		try {
+			$response = Json::decode($body);
+
+			if (isset($response->page)) {
+				return self::parseCollection($response);
+			} else {
+				return self::parseSingle($response);
+			}
+		} catch (\Nette\Utils\JsonException $e) {
+			return $body;
 		}
 	}
 

@@ -21,7 +21,20 @@ class Orders extends Documents
 	public function search($criteria)
 	{
 		$criteria['type'] = 'order';
-		return parent::search($criteria);
+
+		$query = http_build_query($criteria);
+
+		$response = $this->curl->get('/documents/?' . $query);
+
+		return $response;
+	}
+
+
+	public function update($id, $data)
+	{
+		$data['type'] = 'order';
+
+		return parent::update($id, $data);
 	}
 
 
