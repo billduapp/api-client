@@ -46,7 +46,7 @@ abstract class Documents
 
 	public function update($id, $data)
 	{
-		$response = $this->curl->get('/documents/' . $id, $data);
+		$response = $this->curl->patch('/documents/' . $id, $data);
 
 		return $response;
 	}

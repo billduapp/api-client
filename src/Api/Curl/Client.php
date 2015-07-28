@@ -52,7 +52,7 @@ class Client
 
 	public function patch($path, $data = [], $headers = [])
 	{
-		$request = $this->createRequest('POST', $path, $data, $headers, $this->buildCallbacks());
+		$request = $this->createRequest('PATCH', $path, $data, $headers, $this->buildCallbacks());
 
 		$response = $request->send();
 
