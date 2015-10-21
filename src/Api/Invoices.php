@@ -14,4 +14,15 @@ class Invoices extends Documents
 
 		return $response;
 	}
+
+	public function search($criteria)
+	{
+		$criteria['type'] = 'invoice';
+
+		$query = http_build_query($criteria);
+
+		$response = $this->curl->get('/documents/?' . $query);
+
+		return $response;
+	}
 }
