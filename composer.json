@@ -1,6 +1,6 @@
 {
-	"name": "iinvoices/api-client",
-	"description": "API client for minifaktura.sk, minifaktura.cz, minirechnung.at, minirechnung.de",
+	"name": "billdu/api-client",
+	"description": "API client for billdu.com, minifaktura.sk, minifaktura.cz, minirechnung.at, minirechnung.de",
 	"license": "MIT",
 	"authors": [
 		{
