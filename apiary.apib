@@ -1,0 +1,1115 @@
+FORMAT: 1A
+
+# billdu.com API
+Notes API is a *short texts saving* service similar to its physical paper presence on your table.
+
+# Group Clients
+Notes related resources of the **Clients API**
+
+## Clients [/clients?apiKey={apiKey}&signature={signature}&amp;timestamp={timestamp}]
+
++ Parameters
+    + apiKey (required, string, `2961654ce6c3d01c79edc98c8d930d4cc663cda4`) Your `apiKey` of selected company
+    + signature (required, string, `213213jjflkjdsfl343k4jjfdsdsf`) Generated signatur from your data
+    + timestamp (required, integer, `1443620910`) Timestamp of request
+
+### List all clients [GET]
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "page": 1,
+                "limit": 10,
+                "pages": 1,
+                "total": 1,
+                "_links": {
+                    "self": {
+                        "href": "/clients/page=1&limit=10"
+                    },
+                    "first": {
+                        "href": "/clients/page=1&limit=10"
+                    },
+                    "last": {
+                        "href": "/clients/page=1&limit=10"
+                    }
+                },
+                "_embedded": {
+                    "items": [
+                        {
+                            "id": 1,
+                            "country": "",
+                            "degree": null,
+                            "salutation": null,
+                            "company": "lkjkl",
+                            "name": null,
+                            "surname": null,
+                            "fullname": "",
+                            "street": "",
+                            "zip": "",
+                            "city": "",
+                            "created": "2015-02-10T11:26:34+0100",
+                            "modified": "2015-02-10T11:26:34+0100",
+                            "phone": "",
+                            "mobil": "",
+                            "fax": "",
+                            "web": "",
+                            "note": "",
+                            "email": "",
+                            "com_id": "",
+                            "tax_id": null,
+                            "vat_id": "",
+                            "bank_account": null,
+                            "invoices": [
+                                {
+                                    "_links": {
+                                        "self": {
+                                            "href": "/invoices/1"
+                                        }
+                                    }
+                                },
+                                {
+                                    "_links": {
+                                        "self": {
+                                            "href": "/invoices/2"
+                                        }
+                                    }
+                                }
+                            ],
+                            "expenses": [],
+                            "documents": [],
+                            "_links": {
+                                "self": {
+                                    "href": "/clients/1"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+
+### Create a Client [POST]
++ Request (application/json)
+
+     + Body
+     
+            {
+                "company": "ACME Ltd.",
+                "fullname": "",
+                "street": "1st Avenue",
+                "street2": "",
+                "zip": "",
+                "city": "New York",
+                "province": "New York",
+                "country": "USA",
+                "shippingCompany": "",
+                "shippingName": "",
+                "shippingSurname": "",
+                "shippingFullname": "",
+                "shippingStreet": "",
+                "shippingStreet2": "",
+                "shippingZip": "",
+                "shippingCity": "",
+                "shippingProvince": "",
+                "shippingCountry": "",
+                "phone": "+555555555",
+                "mobil": "+5555550000",
+                "fax": "",
+                "web": "example.com",
+                "note": "",
+                "email": "acme@example.com",
+                "companyId": "",
+                "vatId": "",
+                "taxId": "US13456789"
+            }
+
++ Response 201 (application/json)
+
+    + Body
+            
+            {
+                "id": 1,
+                "degree": null,
+                "salutation": null,
+                "company": "ACME Ltd.",
+                "name": null,
+                "surname": null,
+                "fullname": "",
+                "street": "1st Avenue",
+                "street2": "",
+                "zip": "",
+                "city": "New York",
+                "province": "New York",
+                "country": "USA",
+                "shipping_company": "",
+                "shipping_name": "",
+                "shipping_surname": "",
+                "shipping_fullname": " ",
+                "shipping_street": "",
+                "shipping_street2": "",
+                "shipping_zip": "",
+                "shipping_city": "",
+                "shipping_province": "",
+                "shipping_country": "",
+                "created": "2015-09-30T12:43:52+0200",
+                "modified": "2015-09-30T12:43:52+0200",
+                "phone": "+555555555",
+                "mobile": "+5555550000",
+                "fax": "",
+                "web": "example.com",
+                "note": "",
+                "email": "acme@example.com",
+                "com_id": null,
+                "tax_id": "US13456789",
+                "vat_id": "",
+                "bank_account": null,
+                "invoices": [],
+                "expenses": [],
+                "documents": [],
+                "ratings": null,
+                "_links": {
+                    "self": {
+                        "href": "/clients/1"
+                    }
+                }
+            }
+
+## Client [/clients/{id}?apiKey={apiKey}&signature={signature}&amp;timestamp={timestamp}]
+A single Client object with all its details
+
++ Parameters
+    + id (required, number, `1`) ... Numeric `id` of the Client
+    + apiKey (required, string, `2961654ce6c3d01c79edc98c8d930d4cc663cda4`) Your `apiKey` of selected company
+    + signature (required, string, `213213jjflkjdsfl343k4jjfdsdsf`) ... Generated signatur from your data
+    + timestamp (required, integer, `1443620910`) ... Timestamp of request
+
+### Retrieve a Client [GET]
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "id": 4,
+                "country": "Slovakia",
+                "degree": null,
+                "salutation": null,
+                "company": "Test client",
+                "name": null,
+                "surname": null,
+                "fullname": "Name",
+                "street": "Test street",
+                "zip": "123456",
+                "city": "city",
+                "created": "2015-03-18T17:42:37+0100",
+                "modified": "2015-03-19T13:41:27+0100",
+                "phone": "1324567",
+                "mobil": "1324567",
+                "fax": "1324567",
+                "web": "example.org",
+                "note": "Notiz",
+                "email": "email@example.org",
+                "com_id": "1345",
+                "tax_id": "45789",
+                "vat_id": "123456789",
+                "bank_account": null,
+                "invoices": [],
+                "expenses": [],
+                "documents": [],
+                "_links": {
+                    "self": {
+                        "href": "/clients/4"
+                    }
+                }
+            }
+
+### Remove a client [DELETE]
++ Response 204
+
+# Group Products
+Notes related resources of the **Products API**
+
+## Products [/products?apiKey={apiKey}&signature={signature}&amp;timestamp={timestamp}]
+
++ Parameters
+    + apiKey (required, string, `2961654ce6c3d01c79edc98c8d930d4cc663cda4`) ... Your `apiKey` of selected company
+    + signature (required, string, `213213jjflkjdsfl343k4jjfdsdsf`) ... Generated signatur from your data
+    + timestamp (required, integer, `1443620910`) Timestamp of request
+
+### List all products [GET]
++ Response 200 (application/json)
+
+        {
+            "page": 1,
+            "limit": 10,
+            "pages": 1,
+            "total": 3,
+            "_links": {
+                "self": {
+                    "href": "/products?page=1&limit=10"
+                },
+                "first": {
+                    "href": "/products?page=1&limit=10"
+                },
+                "last": {
+                    "href": "/products?page=1&limit=10"
+                }
+            },
+            "_embedded": {
+                "items": [
+                    {
+                        "id": 1,
+                        "label": "example item 1",
+                        "stock_number": "",
+                        "price": 50,
+                        "vat": 0,
+                        "count": 1,
+                        "unit": "h",
+                        "created": "2015-09-30T12:56:28+0200",
+                        "modified": "2015-09-30T12:56:28+0200",
+                        "_links": {
+                            "self": {
+                                "href": "/items/1"
+                            }
+                        }
+                    },
+                    {
+                        "id": 2,
+                        "label": "example item 2",
+                        "stock_number": "",
+                        "price": 500,
+                        "vat": 0,
+                        "count": 1,
+                        "unit": "pc",
+                        "created": "2015-09-30T12:56:45+0200",
+                        "modified": "2015-09-30T12:56:45+0200",
+                        "_links": {
+                            "self": {
+                                "href": "/items/2"
+                            }
+                        }
+                    },
+                    {
+                        "id": 3,
+                        "label": "example item 3",
+                        "stock_number": "",
+                        "price": 100,
+                        "vat": 0,
+                        "count": 1,
+                        "unit": "m",
+                        "created": "2015-09-30T12:57:02+0200",
+                        "modified": "2015-09-30T12:57:02+0200",
+                        "_links": {
+                            "self": {
+                                "href": "/items/3"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+
+### Create a Product [POST]
++ Request (application/json)
+
+    + Body
+    
+            {
+                "label": "item1",
+                "stockNumber": null,
+                "price": 100,
+                "tax": 15,
+                "count": 1,
+                "unit": "pc"
+            }
+
++ Response 201 (application/json)
+
+        {
+            "id": 4,
+            "label": "item1",
+            "stock_number": null,
+            "price": 100,
+            "vat": 0,
+            "count": 1,
+            "unit": "pc",
+            "created": "2015-09-30T15:13:46+0200",
+            "modified": "2015-09-30T15:13:46+0200",
+            "_links": {
+                "self": {
+                    "href": "/items/4"
+                }
+            }
+        }
+
+## Product [/products/{id}?apiKey={apiKey}&signature={signature}&amp;timestamp={timestamp}]
+A single Product object with all its details
+
++ Parameters
+    + id (required, number, `1`) ... Numeric `id` of the Product
+    + apiKey (required, string, `2961654ce6c3d01c79edc98c8d930d4cc663cda4`) ... Your `apiKey` of selected company
+    + signature (required, string, `213213jjflkjdsfl343k4jjfdsdsf`) ... Generated signatur from your data
+    + timestamp (required, integer, `1443620910`) ... Timestamp of request
+
++ Attributes (object)
+    + label: item1 (required, string)
+    + stockNumber: 1415203908 (optional, string) - SKU
+    + price: 25 (required, number)
+    + tax: 15 (optional, number) - Default 0
+    + count: 5 (optional, number) - Default 1
+    + unit: pc (optional, string)
+
+### Retrieve a Product [GET]
+
++ Response 200 (application/json)
+        
+            {
+                "id": 3,
+                "label": "example item 3",
+                "stock_number": "",
+                "price": 100,
+                "vat": 0,
+                "count": 1,
+                "unit": "m",
+                "created": "2015-09-30T12:57:02+0200",
+                "modified": "2015-09-30T12:57:02+0200",
+                "_links": {
+                    "self": {
+                        "href": "/items/3"
+                    }
+                }
+            }
+
+### Remove a Product [DELETE]
++ Response 204
+
+# Group Documents
+
+Notes related resources of the **Clients API**
+
+## Documents [/documents?type={type}&apiKey={apiKey}&signature={signature}&amp;timestamp={timestamp}]
+
++ Parameters
+    + type (optional, string, `invoice`) The type of documents you want to display
+    + apiKey (required, string, `2961654ce6c3d01c79edc98c8d930d4cc663cda4`) Your `apiKey` of selected company
+    + signature (required, string, `213213jjflkjdsfl343k4jjfdsdsf`) Generated signatur from your data
+    + timestamp (required, integer, `1443620910`) Timestamp of request
+
+### List all documents [GET]
+
++ Response 200 (application/json)
+
+            {
+                "page": 1,
+                "limit": 10,
+                "pages": 1,
+                "total": 3,
+                "_links": {
+                    "self": {
+                        "href": "/documents?page=1&limit=10"
+                    },
+                    "first": {
+                        "href": "/documents?page=1&limit=10"
+                    },
+                    "last": {
+                        "href": "/documents?page=1&limit=10"
+                    }
+                },
+                "_embedded": {
+                    "items": [
+                        {
+                            "id": 4,
+                            "custom_id": null,
+                            "currency": "EUR",
+                            "vs": "2015001",
+                            "cs": "",
+                            "ss": "",
+                            "status": "exposed",
+                            "payment": "transfer",
+                            "delivery_type": null,
+                            "note": "",
+                            "order_number": "",
+                            "delivery_note": "",
+                            "discount": 0,
+                            "sconto_days": 0,
+                            "created": "2015-10-06T12:29:49+0200",
+                            "modified": "2015-10-06T12:29:49+0200",
+                            "issue_date": "2015-10-06T00:00:00+0200",
+                            "delivery_date": "2015-10-06T00:00:00+0200",
+                            "execution_date": null,
+                            "maturity_date": 14,
+                            "total_price": 650,
+                            "price": 650,
+                            "tax": 0,
+                            "serial": "2015001",
+                            "client": {
+                                "id": 3,
+                                "degree": null,
+                                "salutation": null,
+                                "company": "ACME Ltd.",
+                                "name": null,
+                                "surname": null,
+                                "fullname": "",
+                                "street": "1st Avenue",
+                                "street2": "",
+                                "zip": "",
+                                "city": "New York",
+                                "province": "New York",
+                                "country": "USA",
+                                "shipping_company": "",
+                                "shipping_name": "",
+                                "shipping_surname": "",
+                                "shipping_fullname": " ",
+                                "shipping_street": "",
+                                "shipping_street2": "",
+                                "shipping_zip": "",
+                                "shipping_city": "",
+                                "shipping_province": "",
+                                "shipping_country": "",
+                                "created": null,
+                                "modified": null,
+                                "phone": "+555555555",
+                                "mobile": "+5555550000",
+                                "fax": "",
+                                "web": "example.com",
+                                "note": "",
+                                "email": "acme@example.com",
+                                "com_id": null,
+                                "tax_id": "US13456789",
+                                "vat_id": "",
+                                "bank_account": null,
+                                "invoices": [],
+                                "expenses": [],
+                                "documents": {},
+                                "ratings": {},
+                                "_links": {
+                                    "self": {
+                                        "href": "/clients/3"
+                                    }
+                                }
+                            },
+                            "supplier": {
+                                "id": 1,
+                                "country": "US",
+                                "company": "PTI Ltd.",
+                                "fullname": "",
+                                "street": "Broadway",
+                                "street2": "",
+                                "zip": "8885555",
+                                "city": "Seattle",
+                                "province": "Washington",
+                                "phone": "",
+                                "mobile": "",
+                                "fax": "",
+                                "email": "email@email.com",
+                                "paypal_email": "",
+                                "web": "",
+                                "business_id": "",
+                                "tax_id": "",
+                                "vat_id": "",
+                                "vat_payer": 0,
+                                "registered": "",
+                                "logo": null,
+                                "modified": {}
+                            },
+                            "payments": [],
+                            "author": "email@email.com",
+                            "logo": {
+                                "_links": {
+                                    "self": {
+                                        "href": "/images/1"
+                                    }
+                                }
+                            },
+                            "signature": null,
+                            "credit_doc": null,
+                            "header": "We invoice you these items:",
+                            "locale": "en",
+                            "document_color": "#37ABDB",
+                            "paid_on": null,
+                            "income_cash_voucher": null,
+                            "_links": {
+                                "self": {
+                                    "href": "/invoices/4"
+                                },
+                                "pdf": {
+                                    "href": "/invoices/4/download"
+                                },
+                                "logo": {
+                                    "href": "/images/1"
+                                },
+                                "signature": {
+                                    "href": null
+                                }
+                            }
+                        },
+                        {
+                            "id": 2,
+                            "custom_id": "305",
+                            "currency": "EUR",
+                            "vs": "",
+                            "cs": "",
+                            "ss": "",
+                            "status": "exposed",
+                            "payment": "transfer",
+                            "delivery_type": null,
+                            "note": null,
+                            "order_number": null,
+                            "delivery_note": null,
+                            "discount": 0,
+                            "sconto_days": 0,
+                            "created": "2015-09-30T11:59:56+0200",
+                            "modified": "2015-09-30T11:59:56+0200",
+                            "issue_date": "2015-09-30T00:00:00+0200",
+                            "delivery_date": "2015-09-30T00:00:00+0200",
+                            "execution_date": null,
+                            "maturity_date": 14,
+                            "total_price": 600,
+                            "price": 500,
+                            "tax": 100,
+                            "serial": "2015002",
+                            "client": {
+                                "id": 1,
+                                "degree": null,
+                                "salutation": null,
+                                "company": "",
+                                "name": "jozko",
+                                "surname": "mrkvicka",
+                                "fullname": "jozko mrkvicka",
+                                "street": null,
+                                "street2": null,
+                                "zip": null,
+                                "city": null,
+                                "province": null,
+                                "country": null,
+                                "shipping_company": "api company",
+                                "shipping_name": "jozko",
+                                "shipping_surname": "mrkvicka",
+                                "shipping_fullname": "jozko mrkvicka",
+                                "shipping_street": null,
+                                "shipping_street2": null,
+                                "shipping_zip": null,
+                                "shipping_city": null,
+                                "shipping_province": null,
+                                "shipping_country": null,
+                                "created": null,
+                                "modified": null,
+                                "phone": null,
+                                "mobile": null,
+                                "fax": null,
+                                "web": null,
+                                "note": null,
+                                "email": "email@email.com",
+                                "com_id": null,
+                                "tax_id": null,
+                                "vat_id": null,
+                                "bank_account": null,
+                                "invoices": [],
+                                "expenses": [],
+                                "documents": {},
+                                "ratings": {},
+                                "_links": {
+                                    "self": {
+                                        "href": "/clients/1"
+                                    }
+                                }
+                            },
+                            "supplier": {
+                                "id": 1,
+                                "country": "US",
+                                "company": "PTI Ltd.",
+                                "fullname": "",
+                                "street": "Broadway",
+                                "street2": null,
+                                "zip": "888555",
+                                "city": "Seattle",
+                                "province": "Washington",
+                                "phone": "",
+                                "mobile": "",
+                                "fax": "",
+                                "email": "email@email.com",
+                                "paypal_email": "",
+                                "web": "",
+                                "business_id": "",
+                                "tax_id": "",
+                                "vat_id": "",
+                                "vat_payer": 0,
+                                "registered": "",
+                                "logo": null,
+                                "modified": {}
+                            },
+                            "payments": [],
+                            "author": "email@email.com",
+                            "logo": null,
+                            "signature": null,
+                            "credit_doc": null,
+                            "header": "Bill for:",
+                            "locale": "ehn",
+                            "document_color": "#37ABDB",
+                            "paid_on": null,
+                            "income_cash_voucher": null,
+                            "_links": {
+                                "self": {
+                                    "href": "/invoices/2"
+                                },
+                                "pdf": {
+                                    "href": "/invoices/2/download"
+                                },
+                                "logo": {
+                                    "href": null
+                                },
+                                "signature": {
+                                    "href": null
+                                }
+                            }
+                        },
+                        {
+                            "id": 1,
+                            "custom_id": "305",
+                            "currency": "EUR",
+                            "vs": "",
+                            "cs": "",
+                            "ss": "",
+                            "status": "exposed",
+                            "payment": "transfer",
+                            "delivery_type": null,
+                            "note": null,
+                            "order_number": null,
+                            "delivery_note": null,
+                            "discount": 0,
+                            "sconto_days": 0,
+                            "created": "2015-09-30T11:57:21+0200",
+                            "modified": "2015-09-30T11:57:21+0200",
+                            "issue_date": "2015-09-30T00:00:00+0200",
+                            "delivery_date": "2015-09-30T00:00:00+0200",
+                            "execution_date": null,
+                            "maturity_date": 14,
+                            "total_price": 600,
+                            "price": 500,
+                            "tax": 100,
+                            "serial": "OBJ2015001",
+                            "client": {
+                                "id": 1,
+                                "degree": null,
+                                "salutation": null,
+                                "company": "",
+                                "name": "jozko",
+                                "surname": "mrkvicka",
+                                "fullname": "jozko mrkvicka",
+                                "street": null,
+                                "street2": null,
+                                "zip": null,
+                                "city": null,
+                                "province": null,
+                                "country": null,
+                                "shipping_company": "api company",
+                                "shipping_name": "jozko",
+                                "shipping_surname": "mrkvicka",
+                                "shipping_fullname": "jozko mrkvicka",
+                                "shipping_street": null,
+                                "shipping_street2": null,
+                                "shipping_zip": null,
+                                "shipping_city": null,
+                                "shipping_province": null,
+                                "shipping_country": null,
+                                "created": null,
+                                "modified": null,
+                                "phone": null,
+                                "mobile": null,
+                                "fax": null,
+                                "web": null,
+                                "note": null,
+                                "email": "email@email.com",
+                                "com_id": null,
+                                "tax_id": null,
+                                "vat_id": null,
+                                "bank_account": null,
+                                "invoices": [],
+                                "expenses": [],
+                                "documents": {},
+                                "ratings": null,
+                                "_links": {
+                                    "self": {
+                                        "href": "/clients/1"
+                                    }
+                                }
+                            },
+                            "supplier": {
+                                "id": 1,
+                                "country": "US",
+                                "company": "PTI Ltd.",
+                                "fullname": "",
+                                "street": "Broadway",
+                                "street2": null,
+                                "zip": "888555",
+                                "city": "Seattle",
+                                "province": null,
+                                "phone": "",
+                                "mobile": "",
+                                "fax": "",
+                                "email": "martin@bazo.sk",
+                                "paypal_email": "",
+                                "web": "",
+                                "business_id": "",
+                                "tax_id": "",
+                                "vat_id": "",
+                                "vat_payer": 0,
+                                "registered": "",
+                                "logo": null,
+                                "modified": {}
+                            },
+                            "payments": [],
+                            "author": "email@email.com",
+                            "logo": null,
+                            "signature": null,
+                            "credit_doc": null,
+                            "header": "Bill for",
+                            "locale": "sk",
+                            "document_color": "#37ABDB",
+                            "paid_on": null,
+                            "income_cash_voucher": null,
+                            "_links": {
+                                "self": {
+                                    "href": "/invoices/1"
+                                },
+                                "pdf": {
+                                    "href": "/invoices/1/download"
+                                },
+                                "logo": {
+                                    "href": null
+                                },
+                                "signature": {
+                                    "href": null
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+
+### Create a Document [POST]
+
++ Request (application/json)
+
+    + Body
+    
+            {
+                "type": "order",
+                "client": 8,
+                "items": [
+                    {
+                    "label": "example item 1",
+                    "price": 1500.00,
+                    "tax": 0,
+                    "stockNumber": "",
+                    "count": 1,
+                    "unit": "pc"
+                    }
+                ]
+            }
+
++ Response 201 (application/json)
+
+            {
+                "id": 7,
+                "custom_id": null,
+                "currency": "EUR",
+                "vs": "",
+                "cs": "",
+                "ss": "",
+                "status": "exposed",
+                "payment": "transfer",
+                "delivery_type": null,
+                "note": null,
+                "order_number": null,
+                "delivery_note": null,
+                "discount": 0,
+                "sconto_days": 0,
+                "created": "2015-10-08T13:58:42+0200",
+                "modified": "2015-10-08T13:58:42+0200",
+                "issue_date": "2015-10-08T13:58:42+0200",
+                "delivery_date": "2015-10-08T13:58:42+0200",
+                "execution_date": null,
+                "maturity_date": 14,
+                "total_price": 1500,
+                "price": 1500,
+                "tax": 0,
+                "serial": "OBJ2015019",
+                "client": {
+                    "id": 1,
+                    "degree": null,
+                    "salutation": null,
+                    "company": "",
+                    "name": "jozko",
+                    "surname": "mrkvicka",
+                    "fullname": "jozko mrkvicka",
+                    "street": null,
+                    "street2": null,
+                    "zip": null,
+                    "city": null,
+                    "province": null,
+                    "country": null,
+                    "shipping_company": "api company",
+                    "shipping_name": "jozko",
+                    "shipping_surname": "mrkvicka",
+                    "shipping_fullname": "jozko mrkvicka",
+                    "shipping_street": null,
+                    "shipping_street2": null,
+                    "shipping_zip": null,
+                    "shipping_city": null,
+                    "shipping_province": null,
+                    "shipping_country": null,
+                    "created": null,
+                    "modified": null,
+                    "phone": null,
+                    "mobile": null,
+                    "fax": null,
+                    "web": null,
+                    "note": null,
+                    "email": "mail@mail.com",
+                    "com_id": null,
+                    "tax_id": null,
+                    "vat_id": null,
+                    "bank_account": null,
+                    "invoices": [],
+                    "expenses": [],
+                    "documents": {},
+                    "ratings": {},
+                    "_links": {
+                        "self": {
+                            "href": "/clients/1"
+                        }
+                    }
+                },
+                "supplier": {
+                    "id": 1,
+                    "country": "US",
+                    "company": "Company name",
+                    "fullname": "",
+                    "street": "Street name",
+                    "street2": "",
+                    "zip": "zip code",
+                    "city": "City name",
+                    "province": null,
+                    "phone": "",
+                    "mobile": "",
+                    "fax": "",
+                    "email": "mail@mail.com",
+                    "paypal_email": "",
+                    "web": "",
+                    "business_id": "",
+                    "tax_id": "",
+                    "vat_id": "",
+                    "vat_payer": 0,
+                    "registered": "",
+                    "logo": null,
+                    "modified": {}
+                },
+                "payments": [],
+                "author": "mail@mail.com",
+                "logo": {
+                    "_links": {
+                        "self": {
+                            "href": "/images/1"
+                        }
+                    }
+                },
+                "signature": null,
+                "credit_doc": null,
+                "header": "",
+                "locale": "en",
+                "document_color": "#37ABDB",
+                "paid_on": null,
+                "income_cash_voucher": null,
+                "_links": {
+                    "self": {
+                        "href": "/invoices/7"
+                    },
+                    "pdf": {
+                        "href": "/invoices/7/download"
+                    },
+                    "logo": {
+                        "href": "/images/1"
+                    },
+                    "signature": {
+                        "href": null
+                    }
+                }
+            }
+
+## Document [/documents/{id}?apiKey={apiKey}&signature={signature}&amp;timestamp={timestamp}]
+
+### Retrieve a Document [GET]
+
++ Response 200 (application/json)
+
+            {
+                "id": 7,
+                "custom_id": null,
+                "currency": "EUR",
+                "vs": "",
+                "cs": "",
+                "ss": "",
+                "status": "exposed",
+                "payment": "transfer",
+                "delivery_type": null,
+                "note": null,
+                "order_number": null,
+                "delivery_note": null,
+                "discount": 0,
+                "sconto_days": 0,
+                "created": "2015-10-08T13:58:42+0200",
+                "modified": "2015-10-08T13:58:42+0200",
+                "issue_date": "2015-10-08T13:58:42+0200",
+                "delivery_date": "2015-10-08T13:58:42+0200",
+                "execution_date": null,
+                "maturity_date": 14,
+                "total_price": 1500,
+                "price": 1500,
+                "tax": 0,
+                "serial": "OBJ2015019",
+                "client": {
+                    "id": 1,
+                    "degree": null,
+                    "salutation": null,
+                    "company": "",
+                    "name": "jozko",
+                    "surname": "mrkvicka",
+                    "fullname": "jozko mrkvicka",
+                    "street": null,
+                    "street2": null,
+                    "zip": null,
+                    "city": null,
+                    "province": null,
+                    "country": null,
+                    "shipping_company": "api company",
+                    "shipping_name": "jozko",
+                    "shipping_surname": "mrkvicka",
+                    "shipping_fullname": "jozko mrkvicka",
+                    "shipping_street": null,
+                    "shipping_street2": null,
+                    "shipping_zip": null,
+                    "shipping_city": null,
+                    "shipping_province": null,
+                    "shipping_country": null,
+                    "created": null,
+                    "modified": null,
+                    "phone": null,
+                    "mobile": null,
+                    "fax": null,
+                    "web": null,
+                    "note": null,
+                    "email": "mail@mail.com",
+                    "com_id": null,
+                    "tax_id": null,
+                    "vat_id": null,
+                    "bank_account": null,
+                    "invoices": [],
+                    "expenses": [],
+                    "documents": {},
+                    "ratings": {},
+                    "_links": {
+                        "self": {
+                            "href": "/clients/1"
+                        }
+                    }
+                },
+                "supplier": {
+                    "id": 1,
+                    "country": "US",
+                    "company": "Company name",
+                    "fullname": "",
+                    "street": "Street name",
+                    "street2": "",
+                    "zip": "zip code",
+                    "city": "City name",
+                    "province": null,
+                    "phone": "",
+                    "mobile": "",
+                    "fax": "",
+                    "email": "mail@mail.com",
+                    "paypal_email": "",
+                    "web": "",
+                    "business_id": "",
+                    "tax_id": "",
+                    "vat_id": "",
+                    "vat_payer": 0,
+                    "registered": "",
+                    "logo": null,
+                    "modified": {}
+                },
+                "payments": [],
+                "author": "mail@mail.com",
+                "logo": {
+                    "_links": {
+                        "self": {
+                            "href": "/images/1"
+                        }
+                    }
+                },
+                "signature": null,
+                "credit_doc": null,
+                "header": "",
+                "locale": "en",
+                "document_color": "#37ABDB",
+                "paid_on": null,
+                "income_cash_voucher": null,
+                "_links": {
+                    "self": {
+                        "href": "/invoices/7"
+                    },
+                    "pdf": {
+                        "href": "/invoices/7/download"
+                    },
+                    "logo": {
+                        "href": "/images/1"
+                    },
+                    "signature": {
+                        "href": null
+                    }
+                }
+            }
+
+
+### Remove a Document [DELETE]
++ Response 204
+
+## Document download [/documents/{id}/download?apiKey={apiKey}&signature={signature}&amp;timestamp={timestamp}]
+
+will download document pdf
+
+### Download a Document [GET]
++ Response 200 (application/pdf)
+
+## Document send [/documents/{id}/send?apiKey={apiKey}&signature={signature}&amp;timestamp={timestamp}]
+
+Will send the documen via email to given recipients
+
++ Request (application/json)
+
+    + Body
+    
+            {
+                "subject": "Invoice for September",
+                "message": "Hello, here is the promised invoice",
+                "recipients": [
+                    "email1@email.com", "email2@email.com"
+                ]
+            }
+
+will download document pdf
+
+### Download a Document [GET]
++ Response 200 (application/pdf)
+
+# Group Images
+Notes related resources of the **Images API**
+
+## Image [/images/{id}?apiKey={apiKey}&signature={signature}&amp;timestamp={timestamp}]
+
+### Retrieve an Image [GET]
+
+Response is the image in binary form, just download and display it
+
++ Response 200 (image/jpeg)
+        
+           
