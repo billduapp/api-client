@@ -2,10 +2,15 @@
 
 namespace iInvoices\Api;
 
+
 /**
  * @author Martin Bažík <martin@bazo.sk>
  */
-class Proformas
+class Proformas extends TypedDocuments
 {
-	//put your code here
+
+	const TYPE = 'proforma';
+
+
+
 }

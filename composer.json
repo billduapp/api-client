@@ -9,7 +9,7 @@
 		}
 	],
 	"require": {
-		"nette/utils": "@dev"
+		"nette/utils": "@stable"
 	},
 	"require-dev": {
 		"nette/tester": "@dev",

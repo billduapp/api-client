@@ -8,7 +8,7 @@ use iInvoices\Api\Curl\Client;
 /**
  * @author Martin Bažík <martin@bazo.sk>
  */
-abstract class Documents
+class Documents
 {
 
 	/** @var Client */
@@ -75,9 +75,19 @@ abstract class Documents
 	public function getDownloadLink($id)
 	{
 		$request = $this->curl->createRequest('GET', '/documents/' . $id . '/download');
-		$url	 = $request->buildUrl();
+		$url = $request->buildUrl();
 
 		return $url;
+	}
+
+
+	public function search($criteria)
+	{
+		$query = http_build_query($criteria);
+
+		$response = $this->curl->get('/documents/?' . $query);
+
+		return $response;
 	}
 
 

@@ -22,9 +22,6 @@ class ApiClient
 	/** @var string */
 	private $apiSecret;
 
-	/** @var Client */
-	private $curl;
-
 	/** @var Clients */
 	public $clients;
 
@@ -39,8 +36,8 @@ class ApiClient
 
 	public function __construct($domain, $apiKey = NULL, $apiSecret = NULL)
 	{
-		$this->domain	 = $domain;
-		$this->apiKey	 = $apiKey;
+		$this->domain = $domain;
+		$this->apiKey = $apiKey;
 		$this->apiSecret = $apiSecret;
 
 		$config = [
@@ -54,15 +51,15 @@ class ApiClient
 
 			$timestamp = time();
 
-			$toSign				 = $data;
+			$toSign = $data;
 			$toSign['timestamp'] = (int) $timestamp;
-			$toSign['apiKey']	 = $this->apiKey;
+			$toSign['apiKey'] = $this->apiKey;
 
 			ksort($toSign);
 
 			$json = \Nette\Utils\Json::encode($toSign);
 
-			$signature	 = base64_encode(hash_hmac('sha512', $json, $this->apiSecret, $raw		 = TRUE));
+			$signature = base64_encode(hash_hmac('sha512', $json, $this->apiSecret, $raw = TRUE));
 
 			$request->setQuery('apiKey', $this->apiKey);
 			$request->setQuery('timestamp', $timestamp);
@@ -73,10 +70,12 @@ class ApiClient
 			return ResponseParser::parse($response);
 		};
 
-		$this->clients	 = new Clients($curl);
-		$this->products	 = new Products($curl);
-		$this->orders	 = new Orders($curl);
-		$this->invoices	 = new Invoices($curl);
+		$this->clients = new Clients($curl);
+		$this->documents = new Documents($curl);
+		$this->products = new Products($curl);
+		$this->orders = new Orders($curl);
+		$this->invoices = new Invoices($curl);
+		$this->proformas = new Proformas($curl);
 	}
 
 
@@ -88,7 +87,7 @@ class ApiClient
 	 */
 	public function changeCredentials($apiKey, $apiSecret)
 	{
-		$this->apiKey	 = $apiKey;
+		$this->apiKey = $apiKey;
 		$this->apiSecret = $apiSecret;
 
 		return $this;
