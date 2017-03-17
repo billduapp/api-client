@@ -24,7 +24,7 @@ class Documents
 	{
 		$response = $this->curl->get('/documents/', [
 			'page'	 => $page,
-			'limit'	 => $limit
+			'limit'	 => $limit,
 		]);
 
 		return $response;

@@ -46,6 +46,7 @@ class Request
 
 		if ($type === 'GET') {
 			$query = array_merge($data);
+			$data = [];
 		}
 
 		$this->path		 = $parsedUrl['path'];
