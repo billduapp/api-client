@@ -31,9 +31,9 @@ class Client
 	}
 
 
-	public function get($path, $headers = [])
+	public function get($path, $query =[], $headers = [])
 	{
-		$request	 = $this->createRequest('GET', $path, [], $headers, $this->buildCallbacks());
+		$request	 = $this->createRequest('GET', $path, $query, $headers, $this->buildCallbacks());
 		$response	 = $request->send();
 
 		return $response;

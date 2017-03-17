@@ -1,6 +1,8 @@
 <?php
 
 namespace iInvoices\Api;
+
+
 use iInvoices\Api\Curl\Client;
 
 /**
@@ -39,9 +41,9 @@ class Products
 
 	public function create($data)
 	{
-		$data['price'] = (float) $data['price'];
-		$data['vat'] = (float) $data['vat'];
-		$data['count'] = (float) $data['count'];
+		$data['price']	 = (float) $data['price'];
+		$data['vat']	 = (float) $data['vat'];
+		$data['count']	 = (float) $data['count'];
 
 		$response = $this->curl->post('/products/', $data);
 
@@ -51,7 +53,7 @@ class Products
 
 	public function update($id, $data)
 	{
-		$response = $this->curl->get('/products/' . $id, $data);
+		$response = $this->curl->post('/products/' . $id, $data);
 
 		return $response;
 	}

@@ -44,6 +44,10 @@ class Request
 			parse_str($parsedUrl['query'], $query);
 		}
 
+		if ($type === 'GET') {
+			$query = array_merge($data);
+		}
+
 		$this->path		 = $parsedUrl['path'];
 		$this->query	 = $query;
 		$this->data		 = $data;
@@ -75,8 +79,7 @@ class Request
 	public function send()
 	{
 		$url = $this->buildUrl();
-
-		$ch = curl_init($url);
+		$ch	 = curl_init($url);
 
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);

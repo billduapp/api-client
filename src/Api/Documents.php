@@ -20,9 +20,12 @@ class Documents
 	}
 
 
-	public function listAll()
+	public function listAll($page = 1, $limit = 10)
 	{
-		$response = $this->curl->get('/documents');
+		$response = $this->curl->get('/documents/', [
+			'page'	 => $page,
+			'limit'	 => $limit
+		]);
 
 		return $response;
 	}
@@ -75,7 +78,7 @@ class Documents
 	public function getDownloadLink($id)
 	{
 		$request = $this->curl->createRequest('GET', '/documents/' . $id . '/download');
-		$url = $request->buildUrl();
+		$url	 = $request->buildUrl();
 
 		return $url;
 	}
@@ -83,9 +86,7 @@ class Documents
 
 	public function search($criteria)
 	{
-		$query = http_build_query($criteria);
-
-		$response = $this->curl->get('/documents/?' . $query);
+		$response = $this->curl->get('/documents/', $criteria);
 
 		return $response;
 	}
