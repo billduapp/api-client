@@ -10,6 +10,7 @@ require __DIR__.'/src/Api/Responses/Collection.php';
 require __DIR__.'/src/Api/ApiClient.php';
 require __DIR__.'/src/Api/Clients.php';
 require __DIR__.'/src/Api/Documents.php';
+require __DIR__.'/src/Api/TypedDocuments.php';
 require __DIR__.'/src/Api/Invoices.php';
 require __DIR__.'/src/Api/Orders.php';
 require __DIR__.'/src/Api/Products.php';
