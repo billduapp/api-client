@@ -11,14 +11,14 @@ class Invoices extends TypedDocuments
 
 	const TYPE = 'invoice';
 
-	public function pay($id, $amount, $currency = 'EUR', \DateTime $date = NULL)
+	public function pay($id, $price, $currency = 'EUR', \DateTime $date = NULL)
 	{
 		if (is_null($date)) {
 			$date = new \DateTime;
 		}
 
 		$data = [
-			'amount' => $amount,
+			'price' => $price,
 			'currency' => $currency,
 			'createdAt' => $date->format('c')
 		];
