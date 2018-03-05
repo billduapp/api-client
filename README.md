@@ -6,7 +6,7 @@ stability: dev
 ## installation
 
    ````
-   composer require iinvoices/api-client:dev-master
+   composer require billdu/api-client:dev-master
    ````
  or require loader.php from package root directory
 
