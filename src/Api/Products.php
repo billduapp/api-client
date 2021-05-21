@@ -23,9 +23,12 @@ class Products
 	/**
 	 * @return \iInvoices\Api\Responses\Collection
 	 */
-	public function listAll()
+	public function listAll($page = 1, $limit = 10)
 	{
-		$response = $this->curl->get('/products');
+		$response = $this->curl->get('/products/', [
+            	  'page'	 => $page,
+           	  'limit'	 => $limit,
+        	]);
 
 		return $response;
 	}
