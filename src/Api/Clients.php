@@ -25,7 +25,7 @@ class Clients
 	 */
 	public function listAll($page = 1, $limit = 10)
 	{
-		$response = $this->curl->get('/clients', [
+		$response = $this->curl->get('/clients/', [
 			'page'	 => $page,
 			'limit'	 => $limit,
 		]);
