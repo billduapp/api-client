@@ -65,7 +65,9 @@ class Documents
 
 	public function download($id)
 	{
-		$this->curl->get('/documents/' . $id . '/download');
+		$response = $this->curl->get('/documents/' . $id . '/download');
+		
+		return $response;
 	}
 
 
